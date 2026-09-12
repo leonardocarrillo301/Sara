@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amor mío</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3E7;
+    --cream-2:#FFFBF5;
+    --mane:#D68A3C;
+    --mane-dark:#A5631F;
+    --face:#E7A75B;
+    --muzzle:#FFF8EE;
+    --shirt:#7FB2DD;
+    --shirt-dark:#4E85B8;
+    --gold:#F4C94A;
+    --brown:#4A2E1B;
+    --brown-soft:#7A5A3F;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background:var(--cream);
+    font-family:'Nunito', sans-serif;
+    color:var(--brown);
+    overflow-x:hidden;
+  }
+
+  body{
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(214,138,60,0.12), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(127,178,221,0.16), transparent 45%);
+  }
+
+  .screen{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:44px 20px 64px;
+  }
+
+  .hidden{ display:none !important; }
+
+  h1.title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:clamp(2.6rem, 9vw, 4.2rem);
+    color:var(--mane-dark);
+    margin:0 0 6px;
+    text-align:center;
+    letter-spacing:0.5px;
+    text-shadow: 2px 3px 0 rgba(255,255,255,0.6);
+  }
+
+  .subtitle{
+    font-family:'Nunito', sans-serif;
+    font-style:italic;
+    font-weight:600;
+    color:var(--brown-soft);
+    font-size:1.05rem;
+    margin:0 0 22px;
+    text-align:center;
+  }
+
+  .lion-wrap{
+    position:relative;
+    width:min(66vw, 260px);
+    margin-bottom:14px;
+    cursor:pointer;
+    user-select:none;
+    animation: breathe 4.5s ease-in-out infinite;
+    filter: drop-shadow(0 16px 22px rgba(74,46,27,0.28));
+  }
+
+  @keyframes breathe{
+    0%,100%{ transform: translateY(0px); }
+    50%{ transform: translateY(-8px); }
+  }
+
+  .lion-svg{ width:100%; height:auto; display:block; }
+
+  #mane{
+    transform-box: view-box;
+    transform-origin: 120px 140px;
+    animation: maneSway 3.2s ease-in-out infinite alternate;
+  }
+
+  @keyframes maneSway{
+    from{ transform: rotate(-3deg); }
+    to{ transform: rotate(3deg); }
+  }
+
+  .eyelid{
+    transform-box: view-box;
+    transform: scaleY(0);
+  }
+  .eyelid-left{ transform-origin: 100px 130px; }
+  .eyelid-right{ transform-origin: 140px 130px; }
+
+  .lion-wrap.winking .eyelid-right{
+    animation: wink 0.55s ease-in-out 1;
+  }
+
+  @keyframes wink{
+    0%{ transform:scaleY(0); }
+    45%{ transform:scaleY(1); }
+    100%{ transform:scaleY(0); }
+  }
+
+  .tail{
+    transform-box: view-box;
+    transform-origin: 175px 235px;
+    animation: tailWag 1.6s ease-in-out infinite alternate;
+  }
+  @keyframes tailWag{
+    from{ transform: rotate(-8deg); }
+    to{ transform: rotate(10deg); }
+  }
+
+  .bubble{
+    position:relative;
+    background:var(--cream-2);
+    border:2px solid var(--shirt);
+    border-radius:20px;
+    padding:14px 22px;
+    max-width:320px;
+    text-align:center;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--brown);
+    margin-bottom:34px;
+    opacity:0;
+    transform:translateY(8px);
+    animation: bubble-in 0.6s ease 0.5s forwards;
+  }
+
+  .bubble::after{
+    content:"";
+    position:absolute;
+    top:-11px;
+    left:50%;
+    transform:translateX(-50%);
+    width:0; height:0;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-bottom:12px solid var(--shirt);
+  }
+  .bubble::before{
+    content:"";
+    position:absolute;
+    top:-8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:0; height:0;
+    border-left:9px solid transparent;
+    border-right:9px solid transparent;
+    border-bottom:10px solid var(--cream-2);
+    z-index:1;
+  }
+
+  @keyframes bubble-in{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .buttons{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    width:100%;
+    max-width:340px;
+  }
+
+  .btn{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1.08rem;
+    color:var(--cream-2);
+    background:linear-gradient(180deg, var(--mane) 0%, var(--mane-dark) 100%);
+    border:none;
+    border-radius:16px;
+    padding:16px 20px;
+    cursor:pointer;
+    box-shadow:0 8px 0 var(--mane-dark), 0 12px 18px rgba(74,46,27,0.25);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+
+  .btn.blue{
+    background:linear-gradient(180deg, var(--shirt) 0%, var(--shirt-dark) 100%);
+    box-shadow:0 8px 0 var(--shirt-dark), 0 12px 18px rgba(78,133,184,0.28);
+  }
+
+  .btn:active{
+    transform:translateY(6px);
+    box-shadow:0 2px 0 var(--mane-dark), 0 4px 10px rgba(74,46,27,0.25);
+  }
+  .btn.blue:active{
+    box-shadow:0 2px 0 var(--shirt-dark), 0 4px 10px rgba(78,133,184,0.28);
+  }
+
+  .back-btn{
+    align-self:flex-start;
+    font-family:'Nunito', sans-serif;
+    font-weight:700;
+    color:var(--shirt-dark);
+    background:var(--cream-2);
+    border:2px solid var(--shirt);
+    border-radius:12px;
+    padding:9px 16px;
+    cursor:pointer;
+    margin-bottom:22px;
+    font-size:0.95rem;
+  }
+  .back-btn:hover{ background:var(--shirt); color:var(--cream-2); }
+
+  h2.screen-title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    color:var(--mane-dark);
+    font-size:clamp(1.5rem, 6vw, 2rem);
+    text-align:center;
+    margin:0 0 26px;
+  }
+
+  .phrase-field{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px 16px;
+    max-width:560px;
+  }
+
+  .phrase-item{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    color:var(--mane-dark);
+    background:var(--cream-2);
+    border:2px solid var(--mane);
+    border-radius:14px;
+    padding:8px 14px;
+    font-size:0.98rem;
+    opacity:0;
+    transform:scale(0.6);
+    animation: pop-in 0.4s ease forwards;
+  }
+
+  .phrase-item.blue-style{
+    color:var(--shirt-dark);
+    border-color:var(--shirt);
+  }
+
+  @keyframes pop-in{
+    to{ opacity:1; transform:scale(1); }
+  }
+</style>
+</head>
+<body>
+
+  <section id="home" class="screen">
+    <h1 class="title">Amor mío</h1>
+    <p class="subtitle">alguien te manda un mensajito 🦁</p>
+
+    <div class="lion-wrap" id="lionWrap">
+      <svg class="lion-svg" viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
+
+        <g class="tail">
+          <path d="M170,235 Q205,240 210,205 Q212,190 200,188" fill="none" stroke="var(--face)" stroke-width="10" stroke-linecap="round"/>
+          <circle cx="199" cy="187" r="9" fill="var(--mane-dark)"/>
+        </g>
+
+        <rect x="62" y="196" width="116" height="68" rx="30" fill="var(--face)"/>
+
+        <ellipse cx="84" cy="260" rx="19" ry="15" fill="var(--muzzle)"/>
+        <ellipse cx="156" cy="260" rx="19" ry="15" fill="var(--muzzle)"/>
+        <circle cx="78" cy="259" r="2" fill="var(--brown)"/>
+        <circle cx="90" cy="259" r="2" fill="var(--brown)"/>
+        <circle cx="150" cy="259" r="2" fill="var(--brown)"/>
+        <circle cx="162" cy="259" r="2" fill="var(--brown)"/>
+
+        <rect x="76" y="200" width="88" height="46" rx="16" fill="var(--shirt)" stroke="var(--shirt-dark)" stroke-width="2"/>
+        <text x="120" y="230" text-anchor="middle" font-family="'Baloo 2', sans-serif" font-weight="800" font-size="17" fill="var(--gold)" stroke="var(--shirt-dark)" stroke-width="0.6">LION</text>
+
+        <g id="mane">
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane)" transform="rotate(0 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane-dark)" transform="rotate(22.5 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane)" transform="rotate(45 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane-dark)" transform="rotate(67.5 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane)" transform="rotate(90 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane-dark)" transform="rotate(112.5 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane)" transform="rotate(135 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane-dark)" transform="rotate(157.5 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane)" transform="rotate(180 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane-dark)" transform="rotate(202.5 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane)" transform="rotate(225 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane-dark)" transform="rotate(247.5 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane)" transform="rotate(270 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane-dark)" transform="rotate(292.5 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane)" transform="rotate(315 120 140)"/>
+          <ellipse cx="120" cy="78" rx="15" ry="44" fill="var(--mane-dark)" transform="rotate(337.5 120 140)"/>
+        </g>
+
+        <circle cx="120" cy="140" r="56" fill="var(--face)"/>
+
+        <circle cx="78" cy="95" r="20" fill="var(--face)"/>
+        <circle cx="78" cy="95" r="10" fill="var(--muzzle)"/>
+        <circle cx="162" cy="95" r="20" fill="var(--face)"/>
+        <circle cx="162" cy="95" r="10" fill="var(--muzzle)"/>
+
+        <ellipse cx="120" cy="168" rx="34" ry="26" fill="var(--muzzle)"/>
+
+        <circle cx="107" cy="164" r="1.6" fill="var(--brown)"/>
+        <circle cx="98" cy="169" r="1.6" fill="var(--brown)"/>
+        <circle cx="94" cy="175" r="1.6" fill="var(--brown)"/>
+        <circle cx="133" cy="164" r="1.6" fill="var(--brown)"/>
+        <circle cx="142" cy="169" r="1.6" fill="var(--brown)"/>
+        <circle cx="146" cy="175" r="1.6" fill="var(--brown)"/>
+
+        <path d="M112,148 Q120,158 128,148 Q126,156 120,158 Q114,156 112,148 Z" fill="var(--brown)"/>
+        <path d="M120,158 L120,166 M108,176 Q120,186 132,176" fill="none" stroke="var(--brown)" stroke-width="2.5" stroke-linecap="round"/>
+
+        <path d="M92,116 Q100,108 110,113" fill="none" stroke="var(--brown-soft)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M148,116 Q140,108 130,113" fill="none" stroke="var(--brown-soft)" stroke-width="3" stroke-linecap="round"/>
+
+        <circle cx="100" cy="130" r="7" fill="var(--brown)"/>
+        <circle cx="102" cy="127" r="1.6" fill="#fff"/>
+        <circle cx="140" cy="130" r="7" fill="var(--brown)"/>
+        <circle cx="142" cy="127" r="1.6" fill="#fff"/>
+
+        <ellipse class="eyelid eyelid-left" cx="100" cy="130" rx="8" ry="8" fill="var(--face)"/>
+        <ellipse class="eyelid eyelid-right" cx="140" cy="130" rx="8" ry="8" fill="var(--face)"/>
+
+      </svg>
+    </div>
+
+    <div class="bubble" id="greeting">¡Hola mi amor! 😉</div>
+
+    <div class="buttons">
+      <button class="btn" onclick="showScreen('teamo')">Te Amo ❤️</button>
+      <button class="btn blue" onclick="showScreen('perdon')">Perdón 🥺</button>
+    </div>
+  </section>
+
+  <section id="teamo" class="screen hidden">
+    <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+    <h2 class="screen-title">Para ti 🦁</h2>
+    <div class="phrase-field" id="teamoField"></div>
+  </section>
+
+  <section id="perdon" class="screen hidden">
+    <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+    <h2 class="screen-title">Mi disculpa 💙</h2>
+    <div class="phrase-field" id="perdonField"></div>
+  </section>
+
+<script>
+  function showScreen(id){
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+
+  function fillField(fieldId, text, styleClass, count){
+    const field = document.getElementById(fieldId);
+    if(field.childElementCount > 0) return;
+    for(let i = 0; i < count; i++){
+      const span = document.createElement('span');
+      span.className = 'phrase-item' + (styleClass ? ' ' + styleClass : '');
+      span.textContent = text;
+      span.style.animationDelay = (i * 0.045) + 's';
+      field.appendChild(span);
+    }
+  }
+
+  fillField('teamoField', 'Te Amo❤️', '', 26);
+  fillField('perdonField', 'perdón, eres mi mundo entero', 'blue-style', 26);
+
+  window.addEventListener('load', () => {
+    const wrap = document.getElementById('lionWrap');
+    setTimeout(() => wrap.classList.add('winking'), 350);
+  });
+
+  document.getElementById('lionWrap').addEventListener('click', function(){
+    this.classList.remove('winking');
+    void this.offsetWidth;
+    this.classList.add('winking');
+  });
+</script>
+
+</body>
+</html>
